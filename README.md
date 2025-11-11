@@ -50,3 +50,4 @@ curl -s -X POST http://127.0.0.1:5002/predict \
 - Encodings: `sex` → 0 female, 1 male; `embarked` → one of `S`, `C`, `Q`.
 
 # ADS-PROJECT
+# ADS-PROJECT
