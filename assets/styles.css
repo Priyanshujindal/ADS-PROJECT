@@ -1,0 +1,500 @@
+/* ============================================
+   OPTIMIZED UI STYLES - Performance Focused
+   ============================================ */
+
+/* Static gradient background (no animation for better performance) */
+body {
+    background: #0f172a;
+    background-image: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #1e293b 100%);
+    min-height: 100vh;
+}
+
+/* Static grid background (no animation) */
+.bg-grid {
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 40px 40px;
+    background-position: 0 0, 0 0;
+}
+
+/* Simplified glow animations (less frequent updates) */
+@keyframes glow-survived {
+    0%, 100% { 
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    }
+    50% { 
+        box-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
+    }
+}
+
+@keyframes glow-perished {
+    0%, 100% { 
+        box-shadow: 0 0 15px rgba(248, 113, 113, 0.4);
+    }
+    50% { 
+        box-shadow: 0 0 25px rgba(248, 113, 113, 0.6);
+    }
+}
+
+.glow-survived {
+    animation: glow-survived 3s ease-in-out infinite;
+}
+
+.glow-perished {
+    animation: glow-perished 3s ease-in-out infinite;
+}
+
+/* Optimized panels with reduced backdrop-filter */
+.panel {
+    background: rgba(30, 41, 59, 0.75) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform;
+}
+
+.panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Optimized radial progress */
+.radial-progress {
+    --size: 160px;
+    --thickness: 12px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 9999px;
+    position: relative;
+    background:
+        radial-gradient(circle closest-side, rgba(17, 24, 39, 0.95) 78%, transparent 79% 100%),
+        conic-gradient(var(--ring-color, #34D399) var(--value, 0%), rgba(255,255,255,0.1) 0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.radial-progress:hover {
+    transform: scale(1.02);
+}
+
+.radial-progress::after {
+    content: attr(data-label);
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #f3f4f6;
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+/* Optimized reveal animations */
+.reveal { 
+    opacity: 0; 
+    transform: translateY(20px); 
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.reveal.show { 
+    opacity: 1; 
+    transform: translateY(0);
+}
+
+/* Optimized form inputs */
+input[type="number"],
+input[type="text"],
+input[type="email"],
+select {
+    background: rgba(31, 41, 55, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+    color: #f3f4f6 !important;
+    transition: border-color 0.2s ease, background-color 0.2s ease !important;
+    font-size: 0.95rem !important;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+select:focus {
+    outline: none !important;
+    border-color: rgba(59, 130, 246, 0.5) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    background: rgba(31, 41, 55, 0.95) !important;
+}
+
+input[type="number"]:hover,
+input[type="text"]:hover,
+select:hover {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Optimized buttons */
+button {
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Gradient button (simplified) */
+#predict-btn,
+button[type="submit"] {
+    background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%) !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+    border: none !important;
+}
+
+#predict-btn:hover,
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #059669 100%) !important;
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4) !important;
+    transform: translateY(-1px);
+}
+
+/* Optimized navigation */
+nav {
+    background: rgba(15, 23, 42, 0.85) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+nav a {
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #10b981);
+    transition: width 0.2s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Simplified header (removed animated pseudo-element) */
+header {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Optimized chart containers */
+.bg-gray-700 {
+    background: rgba(31, 41, 55, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.2s ease;
+}
+
+.bg-gray-700:hover {
+    background: rgba(31, 41, 55, 0.85) !important;
+    transform: translateY(-2px);
+}
+
+/* Live estimate cards */
+#live-prob {
+    background: linear-gradient(135deg, #3b82f6, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+/* Result container */
+#result-container {
+    background: rgba(31, 41, 55, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    transition: box-shadow 0.3s ease;
+}
+
+
+/* Theme toggle */
+#theme-toggle {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px 16px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Typography (simplified gradients) */
+h1 {
+    background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+h2, h3 {
+    background: linear-gradient(135deg, #f3f4f6 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* Loading spinner */
+#btn-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Pulse animation (optimized) */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+.live-update {
+    animation: pulse 0.6s ease-in-out;
+}
+
+/* ============================================
+   LIGHT THEME OPTIMIZATIONS
+   ============================================ */
+
+body.theme-light {
+    background: #f0f9ff !important;
+    background-image: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%) !important;
+}
+
+.theme-light .bg-grid {
+    background-image: 
+        linear-gradient(rgba(30, 41, 59, 0.04) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(30, 41, 59, 0.04) 1px, transparent 1px);
+}
+
+.theme-light nav {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(30, 41, 59, 0.1) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+.theme-light nav a {
+    color: #334155 !important;
+}
+.theme-light nav a:hover {
+    color: #0f172a !important;
+}
+
+.theme-light .panel {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(30, 41, 59, 0.1) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+.theme-light .panel:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+.theme-light #mode-toggle {
+    background: rgba(99, 102, 241, 0.08) !important; /* indigo-500/8 */
+    border-color: rgba(99, 102, 241, 0.25) !important;
+}
+.theme-light #mode-toggle:hover {
+    background: rgba(99, 102, 241, 0.14) !important;
+}
+
+.theme-light input,
+.theme-light select {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(30, 41, 59, 0.2) !important;
+    color: #1e293b !important;
+}
+
+.theme-light input:focus,
+.theme-light select:focus {
+    border-color: rgba(59, 130, 246, 0.4) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    background: rgba(255, 255, 255, 1) !important;
+}
+
+.theme-light .bg-gray-700 {
+    background: rgba(248, 250, 252, 0.9) !important;
+    border: 1px solid rgba(30, 41, 59, 0.1);
+}
+
+.theme-light #result-container {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(30, 41, 59, 0.1);
+}
+
+/* Softer success/danger surfaces in day mode */
+.theme-light #result-container.glow-survived {
+    background-color: #ecfdf5 !important; /* emerald-50 */
+    border-color: #a7f3d0 !important;     /* emerald-200 */
+    box-shadow: none !important;
+    animation: none !important;
+}
+.theme-light #result-container.glow-perished {
+    background-color: #fef2f2 !important; /* red-50 */
+    border-color: #fecaca !important;     /* red-200 */
+    box-shadow: none !important;
+    animation: none !important;
+}
+
+.theme-light h1 {
+    background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.theme-light h2,
+.theme-light h3 {
+    background: linear-gradient(135deg, #334155 0%, #64748b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.theme-light #live-prob {
+    background: linear-gradient(135deg, #3b82f6, #10b981);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.theme-light .radial-progress {
+    background:
+        radial-gradient(circle closest-side, rgba(255, 255, 255, 0.98) 78%, transparent 79% 100%),
+        conic-gradient(var(--ring-color, #34D399) var(--value, 0%), rgba(30, 41, 59, 0.15) 0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.theme-light .radial-progress::after {
+    color: #1e293b;
+}
+
+/* Primary CTAs in day mode use brighter, lighter shadows */
+.theme-light #predict-btn,
+.theme-light button[type="submit"],
+.theme-light #compare-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%) !important;
+    box-shadow: 0 6px 12px rgba(59, 130, 246, 0.25) !important;
+}
+.theme-light #predict-btn:hover,
+.theme-light button[type="submit"]:hover,
+.theme-light #compare-btn:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #059669 100%) !important;
+    box-shadow: 0 10px 16px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Cards used for charts in day mode */
+.theme-light .bg-gray-700 {
+    background: #ffffff !important;
+    border-color: rgba(30, 41, 59, 0.08) !important;
+}
+.theme-light #insights h3 {
+    color: #1f2937 !important; /* gray-800 */
+}
+
+/* Responsive optimizations */
+@media (max-width: 768px) {
+    .panel {
+        margin: 0 8px;
+    }
+    
+    .radial-progress {
+        --size: 120px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    /* Disable hover effects on mobile */
+    .panel:hover {
+        transform: none;
+    }
+    
+    .bg-gray-700:hover {
+        transform: none;
+    }
+}
+
+/* Performance optimizations */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduce repaints on scroll */
+.panel,
+.bg-gray-700 {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Optimize focus states */
+*:focus-visible {
+    outline: 2px solid rgba(59, 130, 246, 0.5);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Disable expensive effects on reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .bg-grid {
+        animation: none !important;
+    }
+}
+
+/* Comparison mode specific styles */
+#comparison-mode .panel {
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+#comparison-mode .panel:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.comparison-result-card {
+    min-height: 200px;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-200 min-h-screen flex items-center justify-center">
+    <div class="panel bg-gray-800 rounded-2xl p-8 max-w-md w-full mx-6">
+        <h2 class="text-3xl font-bold text-white mb-6 text-center" id="auth-title">Login</h2>
+        <form id="auth-form" class="space-y-4">
+            <div>
+                <label for="auth-email" class="block text-sm font-medium text-gray-300">Email</label>
+                <input type="email" id="auth-email" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white">
+            </div>
+            <div>
+                <label for="auth-password" class="block text-sm font-medium text-gray-300">Password</label>
+                <input type="password" id="auth-password" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white">
+            </div>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg">Login</button>
+        </form>
+        <p class="mt-4 text-sm text-gray-400 text-center">
+            <span id="auth-switch-text">No account? </span>
+            <button id="auth-switch-btn" class="text-blue-400 hover:underline">Sign up</button>
+        </p>
+        <p id="auth-error" class="mt-2 text-sm text-red-400 hidden"></p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDt3zpXM6Yn85sB6utrl4ClCNI5c3D4QSI",
+            authDomain: "ads-project-c5d3e.firebaseapp.com",
+            projectId: "ads-project-c5d3e",
+            storageBucket: "ads-project-c5d3e.firebasestorage.app",
+            messagingSenderId: "514692371937",
+            appId: "1:514692371937:web:8db73a6b6db3d513082ea0",
+            measurementId: "G-QPVP2JLC59"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let isLoginMode = true;
+
+        const authForm = document.getElementById('auth-form');
+        const authTitle = document.getElementById('auth-title');
+        const authSwitchBtn = document.getElementById('auth-switch-btn');
+        const authSwitchText = document.getElementById('auth-switch-text');
+        const authError = document.getElementById('auth-error');
+
+        authSwitchBtn.addEventListener('click', () => {
+            isLoginMode = !isLoginMode;
+            authTitle.textContent = isLoginMode ? 'Login' : 'Sign Up';
+            authForm.querySelector('button[type="submit"]').textContent = isLoginMode ? 'Login' : 'Sign Up';
+            authSwitchText.textContent = isLoginMode ? 'No account? ' : 'Have an account? ';
+            authSwitchBtn.textContent = isLoginMode ? 'Sign up' : 'Login';
+        });
+
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+            authError.classList.add('hidden');
+            try {
+                if (isLoginMode) {
+                    await signInWithEmailAndPassword(auth, email, password);
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                }
+                // On success, redirect to dashboard
+                window.location.href = 'dashboard.html';
+            } catch (err) {
+                authError.textContent = err.message;
+                authError.classList.remove('hidden');
+            }
+        });
+
+        // Redirect if already logged in
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>

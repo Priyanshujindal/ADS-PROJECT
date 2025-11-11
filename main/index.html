@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titanic Survival Predictor</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- App styles -->
+    <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body class="bg-gray-900 text-gray-200 font-sans bg-grid">
+
+    <!-- Top Navigation -->
+    <nav class="sticky top-0 z-40 backdrop-blur bg-gray-900/70 border-b border-white/10">
+        <div class="container mx-auto px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="h-8 w-8 rounded bg-gradient-to-br from-blue-500 to-emerald-400"></div>
+                <span class="text-white font-semibold">Titanic Predictor</span>
+            </div>
+            <div class="hidden md:flex items-center gap-6 text-sm text-gray-300">
+                <a href="#predictor" class="hover:text-white transition">Predictor</a>
+                <a href="#insights" class="hover:text-white transition">Insights</a>
+                <a href="#about" class="hover:text-white transition">About</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle" aria-label="Toggle theme" class="text-sm text-gray-300 hover:text-white border border-white/10 rounded px-3 py-1.5">
+                    <span id="theme-toggle-label">Night</span>
+                </button>
+                <div class="md:hidden text-gray-300">☰</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero -->
+    <header class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-indigo-600/10 to-emerald-500/10 pointer-events-none"></div>
+        <div class="container mx-auto px-6 py-10 md:py-14 relative">
+            <div class="text-center max-w-3xl mx-auto">
+                <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white">Titanic Survival Predictor</h1>
+                <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-300">Explore key factors that influenced survival and get a personalized prediction powered by machine learning.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="container mx-auto px-6 py-10">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Column 1: The Predictor -->
+            <div id="predictor" class="panel lg:col-span-2 bg-gray-800/80 backdrop-blur rounded-xl shadow-xl ring-1 ring-white/10 p-6 reveal">
+                <h2 class="text-2xl font-semibold mb-2 text-white">Could You Have Survived?</h2>
+                <p class="text-gray-400 mb-6">Enter details below to see the model's prediction. The live estimate updates as you type.</p>
+                
+                <form id="predictor-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Form Inputs -->
+                    <div>
+                        <label for="pclass" class="block text-sm font-medium text-gray-300">Passenger Class</label>
+                        <select id="pclass" class="mt-1 block w-full bg-gray-700/80 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="1">1st Class</option>
+                            <option value="2">2nd Class</option>
+                            <option value="3" selected>3rd Class</option>
+                        </select>
+                        <p class="mt-1 text-xs text-gray-500">Higher classes generally had higher survival.</p>
+                    </div>
+
+                    <div>
+                        <label for="sex" class="block text-sm font-medium text-gray-300">Sex</label>
+                        <select id="sex" class="mt-1 block w-full bg-gray-700/80 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="0">Female</option>
+                            <option value="1" selected>Male</option>
+                        </select>
+                        <p class="mt-1 text-xs text-gray-500">Females had a significantly higher survival rate.</p>
+                    </div>
+
+                    <div>
+                        <label for="age" class="block text-sm font-medium text-gray-300">Age</label>
+                        <input type="number" id="age" value="28" class="mt-1 block w-full bg-gray-700/80 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter age">
+                        <p class="mt-1 text-xs text-gray-500">Children tended to fare better than adults.</p>
+                    </div>
+
+                    <div>
+                        <label for="embarked" class="block text-sm font-medium text-gray-300">Port of Embarkation</label>
+                        <select id="embarked" class="mt-1 block w-full bg-gray-700/80 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="S" selected>Southampton (S)</option>
+                            <option value="C">Cherbourg (C)</option>
+                            <option value="Q">Queenstown (Q)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="sibsp" class="block text-sm font-medium text-gray-300">Siblings / Spouses Aboard</label>
+                        <input type="number" id="sibsp" value="0" min="0" class="mt-1 block w-full bg-gray-700/80 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="parch" class="block text-sm font-medium text-gray-300">Parents / Children Aboard</label>
+                        <input type="number" id="parch" value="0" min="0" class="mt-1 block w-full bg-gray-700/80 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="fare" class="block text-sm font-medium text-gray-300">Fare ($)</label>
+                        <input type="number" id="fare" value="14.45" min="0" step="0.01" class="mt-1 block w-full bg-gray-700/80 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 14.45">
+                    </div>
+
+                    <!-- Button -->
+                    <div class="md:col-span-2">
+                        <button id="predict-btn" type="button" onclick="predictSurvival()" class="w-full bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-500 hover:to-emerald-500 text-white font-semibold py-3 px-4 rounded-lg shadow-lg transition duration-300 flex items-center justify-center gap-3">
+                            <svg id="btn-spinner" class="h-5 w-5 animate-spin hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10" stroke-opacity="0.25" stroke-width="4"/>
+                                <path d="M22 12a10 10 0 0 1-10 10" stroke-width="4" stroke-linecap="round"/>
+                            </svg>
+                            <span>Predict My Fate</span>
+                        </button>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="col-span-1 md:col-span-1 bg-gray-700/70 rounded-lg p-4">
+                                <p class="text-sm text-gray-300">Live Estimate</p>
+                                <p class="text-2xl font-bold"><span id="live-prob">--</span>%</p>
+                            </div>
+                            <div class="col-span-1 md:col-span-2 bg-gray-700/70 rounded-lg p-4">
+                                <p class="text-sm text-gray-300 mb-2">Confidence Gauge</p>
+                                <div class="flex items-center gap-4">
+                                    <div id="live-gauge" class="radial-progress" style="--value:0%;--ring-color:#60A5FA" data-label="--%"></div>
+                                    <div class="text-sm text-gray-300">
+                                        <p>Higher or lower probabilities indicate higher confidence.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Column 2: The Result -->
+            <div class="panel lg:col-span-1 bg-gray-800/80 backdrop-blur rounded-xl shadow-xl ring-1 ring-white/10 p-6 flex flex-col items-center justify-center reveal">
+                <h2 class="text-2xl font-semibold mb-4 text-white text-center">Prediction Result</h2>
+                
+                <div id="result-container" class="w-full text-center p-6 rounded-lg bg-gray-700 shadow-inner">
+                    <div class="flex items-center justify-center">
+                        <div id="prob-ring" class="radial-progress" style="--value:0%;--ring-color:#34D399" data-label="0%"></div>
+                    </div>
+                    <p class="mt-4 text-gray-400">Your results will appear here...</p>
+                </div>
+                <p id="error-text" class="mt-4 text-sm text-red-400 hidden"></p>
+
+                <div class="w-full mt-6 bg-gray-700 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-lg font-semibold text-white">Explain My Prediction (LIME-style)</h3>
+                        <button id="explain-btn" class="text-xs text-gray-200 border border-white/10 rounded px-3 py-1.5">Recompute</button>
+                    </div>
+                    <canvas id="contribChart" height="220"></canvas>
+                    <p class="mt-2 text-xs text-gray-300">Bars show change in predicted survival probability (percentage points) under plausible per-feature changes.</p>
+                </div>
+            </div>
+
+            <!-- Section 2: Key Insights -->
+            <div id="insights" class="panel lg:col-span-3 bg-gray-800/80 backdrop-blur rounded-xl shadow-xl ring-1 ring-white/10 p-6 reveal">
+                <h2 class="text-2xl font-semibold mb-6 text-white text-center">Key Insights: Who Was More Likely to Survive?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Chart 1: By Sex -->
+                    <div class="bg-gray-700 p-4 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-white mb-2 text-center">Survival by Sex</h3>
+                        <canvas id="sexChart"></canvas>
+                    </div>
+                    
+                    <!-- Chart 2: By Class -->
+                    <div class="bg-gray-700 p-4 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-white mb-2 text-center">Survival by Class</h3>
+                        <canvas id="classChart"></canvas>
+                    </div>
+
+                    <!-- Chart 3: By Age -->
+                    <div class="bg-gray-700 p-4 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-white mb-2 text-center">Survival by Age</h3>
+                        <canvas id="ageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: About the Project -->
+            <div id="about" class="panel lg:col-span-3 bg-gray-800/80 backdrop-blur rounded-xl shadow-xl ring-1 ring-white/10 p-6 reveal">
+                <h2 class="text-2xl font-semibold mb-4 text-white">About This Project</h2>
+                <p class="text-gray-400 mb-4">
+                    This website is the final product of a data science project based on the "Titanic: Machine Learning from Disaster" challenge. The goal was to analyze the data to understand what factors contributed to survival and then build a predictive model.
+                </p>
+                <p class="text-gray-400">
+                    The model used for the predictor is a **Logistic Regression** model trained on the original dataset from Kaggle. The features include passenger class, sex, age, fare, port of embarkation, and family size. This simple model was able to achieve an accuracy of **~76.5%** on the test data, demonstrating that survival was far from random and was heavily influenced by these factors.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="panel bg-gray-800/80 mt-10 shadow-inner py-6 border-t border-white/10">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p>A project by <span class="text-gray-300">[Your Name Here]</span></p>
+            <p class="text-xs mt-1">Frontend enhanced with TailwindCSS • Charts by Chart.js</p>
+        </div>
+    </footer>
+
+
+    <!-- App script -->
+    <script src="assets/app.js"></script>
+</body>
+</html>
