@@ -1,5 +1,17 @@
 {
+  "name": "ads-project",
+  "version": "1.0.0",
+  "description": "Titanic Predictor Application",
+  "main": "server.py",
+  "scripts": {
+    "start": "concurrently \"python server.py\" \"python -m http.server 8000\"",
+    "frontend": "python -m http.server 8000",
+    "backend": "python server.py"
+  },
   "dependencies": {
     "firebase": "^12.5.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }

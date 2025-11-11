@@ -1,5 +1,5 @@
-// Backend URL config (override by setting window.BACKEND_URL or localStorage 'backend_url')
-const BACKEND_URL = (typeof window !== 'undefined' && (window.BACKEND_URL || localStorage.getItem('backend_url'))) || 'http://127.0.0.1:5001';
+// Backend URL config (loaded from backend-config.js or localStorage)
+const BACKEND_URL = (typeof window !== 'undefined' && (window.BACKEND_URL || localStorage.getItem('backend_url') || 'http://127.0.0.1:5002'));
 
 // --- THEME HANDLING ---
 (function initTheme() {

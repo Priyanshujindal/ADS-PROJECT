@@ -27,13 +27,13 @@ if os.path.exists('model.pkl'):
     try:
         import joblib
         MODEL = joblib.load('model.pkl')
-        print("✅ Loaded trained model from model.pkl")
+        print("[SUCCESS] Loaded trained model from model.pkl")
     except Exception as e:
-        print(f"⚠️  Could not load model.pkl: {e}")
-        print("📊 Using hardcoded coefficients instead")
+        print(f"[WARNING] Could not load model.pkl: {e}")
+        print("[INFO] Using hardcoded coefficients instead")
 else:
-    print("📊 No model.pkl found - using hardcoded coefficients")
-    print("💡 Run 'python train_model.py' to train and save a model")
+    print("[INFO] No model.pkl found - using hardcoded coefficients")
+    print("[INFO] Run 'python train_model.py' to train and save a model")
 
 
 @app.get("/health")
