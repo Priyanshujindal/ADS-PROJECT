@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titanic Survival Predictor - About</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- App styles -->
+    <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body class="bg-gray-900 text-gray-200 font-sans bg-grid">
+
+    <!-- Top Navigation -->
+    <nav class="sticky top-0 z-40 backdrop-blur bg-gray-900/70 border-b border-white/10">
+        <div class="container mx-auto px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="assets/titanic-ship.png" alt="Titanic Ship" class="h-8 w-8 rounded object-cover">
+                <span class="text-white font-semibold">Titanic Predictor</span>
+            </div>
+            <div class="hidden md:flex items-center gap-6 text-sm text-gray-300">
+                <a href="home.html" class="hover:text-white transition">Home</a>
+                <a href="predictor.html" class="hover:text-white transition">Predictor</a>
+                <a href="insights.html" class="hover:text-white transition">Insights</a>
+                <a href="about.html" class="hover:text-white transition text-blue-400">About</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle" aria-label="Toggle theme" class="text-sm text-gray-300 hover:text-white border border-white/10 rounded px-3 py-1.5">
+                    <span id="theme-toggle-label">Night</span>
+                </button>
+                <button id="auth-btn" class="text-sm text-gray-300 hover:text-white border border-white/10 rounded px-3 py-1.5">Login</button>
+                <div class="md:hidden text-gray-300">☰</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-10">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <div class="inline-block px-4 py-2 bg-indigo-500/20 rounded-full border border-indigo-400/30 mb-4">
+                <span class="text-sm font-semibold text-indigo-300">ℹ️ Project Information</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">About This Project</h1>
+            <p class="text-gray-300 text-lg max-w-2xl mx-auto">Learn about the technology, data, and team behind this interactive Titanic survival predictor</p>
+        </div>
+
+        <!-- Project Overview -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div class="panel bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2 bg-blue-500/20 rounded-lg">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">Project Overview</h2>
+                </div>
+                <div class="space-y-4 text-gray-300">
+                    <p class="leading-relaxed">
+                        This interactive web application is the culmination of a comprehensive data science project based on the famous 
+                        <strong class="text-white">"Titanic: Machine Learning from Disaster"</strong> challenge from Kaggle. 
+                        The goal was to analyze historical passenger data to understand which factors most significantly contributed to survival.
+                    </p>
+                    <p class="leading-relaxed">
+                        Through rigorous data analysis and machine learning, we've built a predictive model that can estimate survival probability 
+                        based on passenger characteristics, providing insights into one of history's most tragic maritime disasters.
+                    </p>
+                    <p class="leading-relaxed">
+                        The application combines modern web technologies with data science to create an educational and engaging experience 
+                        that brings historical data to life through interactive visualizations and real-time predictions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="panel bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2 bg-purple-500/20 rounded-lg">
+                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">Technical Details</h2>
+                </div>
+                <div class="space-y-4 text-gray-300">
+                    <p class="leading-relaxed">
+                        The predictor uses a <strong class="text-blue-400">Logistic Regression</strong> model trained on the original Titanic dataset. 
+                        Key features include passenger class, sex, age, fare, port of embarkation, and family size (siblings/spouses and parents/children).
+                    </p>
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-sm text-gray-400 mb-2">Model Performance</p>
+                        <p class="text-2xl font-bold text-emerald-400">~76.5% Accuracy</p>
+                        <p class="text-xs text-gray-400 mt-2">Demonstrating that survival was far from random and heavily influenced by these factors</p>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-sm font-semibold text-white">Technology Stack:</h3>
+                        <ul class="text-sm space-y-1">
+                            <li>• <strong class="text-blue-400">Frontend:</strong> HTML5, Tailwind CSS, JavaScript ES6+</li>
+                            <li>• <strong class="text-green-400">Backend:</strong> Python Flask, RESTful API</li>
+                            <li>• <strong class="text-purple-400">ML:</strong> Scikit-learn, Logistic Regression</li>
+                            <li>• <strong class="text-yellow-400">Data:</strong> Pandas, NumPy for data processing</li>
+                            <li>• <strong class="text-pink-400">Auth:</strong> Firebase Authentication</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Sources & Methodology -->
+        <div class="panel bg-gray-800 rounded-2xl p-8 border border-gray-700 mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="p-2 bg-green-500/20 rounded-lg">
+                    <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Data Sources & Methodology</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-3">Dataset Features</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span><strong class="text-white">Pclass:</strong> Passenger class (1 = 1st, 2 = 2nd, 3 = 3rd)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span><strong class="text-white">Sex:</strong> Gender (0 = Female, 1 = Male)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span><strong class="text-white">Age:</strong> Age in years</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span><strong class="text-white">SibSp:</strong> Number of siblings/spouses aboard</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span><strong class="text-white">Parch:</strong> Number of parents/children aboard</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span><strong class="text-white">Fare:</strong> Passenger fare in British pounds</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span><strong class="text-white">Embarked:</strong> Port of embarkation (C = Cherbourg, Q = Queenstown, S = Southampton)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-3">Data Processing</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p class="leading-relaxed">
+                            Our data preprocessing pipeline includes several critical steps to ensure accurate predictions:
+                        </p>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-blue-400 mr-2">•</span>
+                                <span><strong class="text-white">Missing Value Imputation:</strong> Strategic filling of missing age and fare data using median values</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-400 mr-2">•</span>
+                                <span><strong class="text-white">Feature Engineering:</strong> Creation of family size and other derived features</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-400 mr-2">•</span>
+                                <span><strong class="text-white">Categorical Encoding:</strong> One-hot encoding for categorical variables</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-400 mr-2">•</span>
+                                <span><strong class="text-white">Feature Scaling:</strong> Standardization of numerical features</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-400 mr-2">•</span>
+                                <span><strong class="text-white">Cross-validation:</strong> K-fold validation for robust model evaluation</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historical Context -->
+        <div class="panel bg-gray-800 rounded-2xl p-8 border border-gray-700 mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="p-2 bg-yellow-500/20 rounded-lg">
+                    <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Historical Context</h2>
+            </div>
+            <div class="prose prose-invert max-w-none">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4 text-gray-300">
+                        <p class="leading-relaxed">
+                            The RMS Titanic, often called the "unsinkable ship," was the largest passenger steamship in the world when it set sail on its maiden voyage on April 10, 1912. Built by the White Star Line, it was a marvel of engineering luxury, designed to transport passengers between Southampton, England, and New York City.
+                        </p>
+                        <p class="leading-relaxed">
+                            Tragically, just four days into its journey, on April 15, 1912, the Titanic struck an iceberg and sank in the North Atlantic Ocean, resulting in one of the deadliest maritime disasters in history. The disaster led to major improvements in maritime safety regulations and procedures.
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                            <h3 class="text-sm font-semibold text-white mb-2">Key Facts</h3>
+                            <ul class="text-sm text-gray-300 space-y-1">
+                                <li>• <strong>Length:</strong> 882 feet 9 inches</li>
+                                <li>• <strong>Height:</strong> 175 feet (from keel to funnels)</li>
+                                <li>• <strong>Capacity:</strong> 2,435 passengers, 892 crew</li>
+                                <li>• <strong>Lifeboats:</strong> Only 20 (capacity for 1,178 people)</li>
+                                <li>• <strong>Survivors:</strong> 710 out of 2,224 aboard</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                            <h3 class="text-sm font-semibold text-white mb-2">"Women and Children First"</h3>
+                            <p class="text-sm text-gray-300">
+                                The famous maritime protocol was followed during the evacuation, which explains why women and children had significantly higher survival rates. This social norm, combined with class-based access to lifeboats, created the survival patterns we analyze today.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Value -->
+        <div class="panel bg-gray-800 rounded-2xl p-8 border border-gray-700">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="p-2 bg-pink-500/20 rounded-lg">
+                    <svg class="w-6 h-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Educational Value</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Data Science</h3>
+                    <p class="text-sm text-gray-300">Learn how machine learning models can predict outcomes from historical data</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">History</h3>
+                    <p class="text-sm text-gray-300">Understand the social and historical context of the Titanic disaster</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Analytics</h3>
+                    <p class="text-sm text-gray-300">Explore data visualization and statistical analysis techniques</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/60">
+        <div class="panel bg-gray-800 rounded-2xl p-8 max-w-md w-full mx-6 relative shadow-2xl border border-gray-700">
+            <button id="close-auth-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            <h2 class="text-2xl font-bold text-white mb-6">Login / Sign Up</h2>
+            <form id="auth-form" class="space-y-4">
+                <div>
+                    <label for="auth-email" class="block text-sm font-medium text-gray-300">Email</label>
+                    <input type="email" id="auth-email" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white">
+                </div>
+                <div>
+                    <label for="auth-password" class="block text-sm font-medium text-gray-300">Password</label>
+                    <input type="password" id="auth-password" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg">Login</button>
+            </form>
+            <p class="mt-4 text-sm text-gray-400 text-center">
+                <span id="auth-switch-text">No account? </span>
+                <button id="auth-switch-btn" class="text-blue-400 hover:underline">Sign up</button>
+            </p>
+            <p id="auth-error" class="mt-2 text-sm text-red-400 hidden"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="backend-config.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDt3zpXM6Yn85sB6utrl4ClCNI5c3D4QSI",
+            authDomain: "ads-project-c5d3e.firebaseapp.com",
+            projectId: "ads-project-c5d3e",
+            storageBucket: "ads-project-c5d3e.firebasestorage.app",
+            messagingSenderId: "514692371937",
+            appId: "1:514692371937:web:8db73a6b6db3d513082ea0",
+            measurementId: "G-QPVP2JLC59"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+
+        // Auth elements
+        const authBtn = document.getElementById('auth-btn');
+        const authModal = document.getElementById('auth-modal');
+        const closeAuthModal = document.getElementById('close-auth-modal');
+        const authForm = document.getElementById('auth-form');
+        const authError = document.getElementById('auth-error');
+        const authSwitchBtn = document.getElementById('auth-switch-btn');
+        const authSwitchText = document.getElementById('auth-switch-text');
+        const authTitle = authModal.querySelector('h2');
+
+        let isLogin = true;
+
+        // Auth modal handlers
+        authBtn.addEventListener('click', () => {
+            authModal.classList.remove('hidden');
+        });
+
+        closeAuthModal.addEventListener('click', () => {
+            authModal.classList.add('hidden');
+        });
+
+        authSwitchBtn.addEventListener('click', () => {
+            isLogin = !isLogin;
+            authTitle.textContent = isLogin ? 'Login' : 'Sign Up';
+            authForm.querySelector('button[type="submit"]').textContent = isLogin ? 'Login' : 'Sign Up';
+            authSwitchText.textContent = isLogin ? 'No account? ' : 'Already have an account? ';
+            authSwitchBtn.textContent = isLogin ? 'Sign up' : 'Login';
+        });
+
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+
+            try {
+                if (isLogin) {
+                    await signInWithEmailAndPassword(auth, email, password);
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                }
+                authModal.classList.add('hidden');
+                authForm.reset();
+            } catch (error) {
+                authError.textContent = error.message;
+                authError.classList.remove('hidden');
+            }
+        });
+
+        // Update auth button based on user state
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                authBtn.textContent = 'Logout';
+                authBtn.addEventListener('click', () => {
+                    signOut(auth);
+                });
+            } else {
+                authBtn.textContent = 'Login';
+            }
+        });
+    </script>
+</body>
+</html>

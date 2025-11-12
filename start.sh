@@ -17,7 +17,7 @@ FRONTEND_PORT=$(find_available_port 8000)
 BACKEND_PORT=$(find_available_port 5002)
 
 echo "🔧 Starting Flask backend on port $BACKEND_PORT..."
-PORT=$BACKEND_PORT .venv/bin/python server.py &
+PORT=$BACKEND_PORT python3 server.py &
 BACKEND_PID=$!
 
 # Wait a moment for backend to start

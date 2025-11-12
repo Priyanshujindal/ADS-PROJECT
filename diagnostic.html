@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Page</title>
+    <style>
+        body { background: #1f2937; color: white; font-family: sans-serif; padding: 20px; }
+        .test { background: #374151; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <h1>Diagnostic Page</h1>
+    <p>Testing various components to identify issues...</p>
+    
+    <div class="test">
+        <h3>1. Basic HTML Test</h3>
+        <p class="success">✓ HTML is loading correctly</p>
+    </div>
+    
+    <div class="test">
+        <h3>2. CSS Test</h3>
+        <p class="success">✓ CSS styles are applied</p>
+    </div>
+    
+    <div class="test">
+        <h3>3. JavaScript Test</h3>
+        <button onclick="testJS()">Test JavaScript</button>
+        <p id="js-result"></p>
+    </div>
+    
+    <div class="test">
+        <h3>4. External Resources Test</h3>
+        <p id="resource-result">Testing...</p>
+    </div>
+    
+    <div class="test">
+        <h3>5. Backend API Test</h3>
+        <button onclick="testAPI()">Test Backend API</button>
+        <p id="api-result"></p>
+    </div>
+    
+    <script>
+        function testJS() {
+            document.getElementById('js-result').innerHTML = '<span class="success">✓ JavaScript is working</span>';
+        }
+        
+        function testAPI() {
+            document.getElementById('api-result').innerHTML = 'Testing API...';
+            
+            fetch('http://127.0.0.1:5002/health')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('api-result').innerHTML = '<span class="success">✓ Backend API is working: ' + data.status + '</span>';
+                })
+                .catch(error => {
+                    document.getElementById('api-result').innerHTML = '<span class="error">✗ Backend API error: ' + error.message + '</span>';
+                });
+        }
+        
+        // Test external resources
+        function testResources() {
+            const results = [];
+            
+            // Test Tailwind CSS
+            fetch('https://cdn.tailwindcss.com')
+                .then(() => results.push('✓ Tailwind CSS loaded'))
+                .catch(() => results.push('✗ Tailwind CSS failed'));
+            
+            // Test Chart.js
+            fetch('https://cdn.jsdelivr.net/npm/chart.js')
+                .then(() => results.push('✓ Chart.js loaded'))
+                .catch(() => results.push('✗ Chart.js failed'));
+            
+            // Test backend-config.js
+            fetch('backend-config.js')
+                .then(() => results.push('✓ backend-config.js loaded'))
+                .catch(() => results.push('✗ backend-config.js failed'));
+            
+            // Test predictor.js
+            fetch('assets/predictor.js')
+                .then(() => results.push('✓ predictor.js loaded'))
+                .catch(() => results.push('✗ predictor.js failed'));
+            
+            setTimeout(() => {
+                document.getElementById('resource-result').innerHTML = results.join('<br>');
+            }, 2000);
+        }
+        
+        // Run tests on page load
+        window.onload = function() {
+            testResources();
+        };
+    </script>
+</body>
+</html>

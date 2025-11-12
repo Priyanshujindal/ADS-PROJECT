@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titanic Survival Predictor - Home</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- App styles -->
+    <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body class="bg-gray-900 text-gray-200 font-sans bg-grid">
+
+    <!-- Top Navigation -->
+    <nav class="sticky top-0 z-40 backdrop-blur bg-gray-900/70 border-b border-white/10">
+        <div class="container mx-auto px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="assets/titanic-ship.png" alt="Titanic Ship" class="h-8 w-8 rounded object-cover">
+                <span class="text-white font-semibold">Titanic Predictor</span>
+            </div>
+            <div class="hidden md:flex items-center gap-6 text-sm text-gray-300">
+                <a href="home.html" class="hover:text-white transition text-blue-400">Home</a>
+                <a href="predictor.html" class="hover:text-white transition">Predictor</a>
+                <a href="insights.html" class="hover:text-white transition">Insights</a>
+                <a href="about.html" class="hover:text-white transition">About</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle" aria-label="Toggle theme" class="text-sm text-gray-300 hover:text-white border border-white/10 rounded px-3 py-1.5">
+                    <span id="theme-toggle-label">Night</span>
+                </button>
+                <button id="auth-btn" class="text-sm text-gray-300 hover:text-white border border-white/10 rounded px-3 py-1.5">Login</button>
+                <div class="md:hidden text-gray-300">☰</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero -->
+    <header class="relative overflow-hidden py-16 md:py-24 min-h-screen flex items-center">
+        <!-- Titanic Background -->
+        <div class="absolute inset-0">
+            <img src="assets/titanic-bg.jpg" alt="Titanic Ship" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-gray-900/70 to-black/80"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-4xl mx-auto mb-16">
+                <div class="inline-block mb-6 px-4 py-2 bg-blue-500/20 backdrop-blur rounded-full border border-blue-400/30">
+                    <span class="text-sm font-semibold text-blue-300">⚓ Machine Learning • Data Science</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6">
+                    <span class="block">Titanic Survival</span>
+                    <span class="block bg-gradient-to-r from-blue-400 via-purple-400 to-emerald-400 bg-clip-text text-transparent">Predictor</span>
+                </h1>
+                <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                    Explore the tragic story of the Titanic through data science and machine learning. Discover what factors influenced survival chances.
+                </p>
+            </div>
+
+            <!-- Info Containers Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- Model Info Container -->
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Our Model</h3>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        We use a <strong>Logistic Regression</strong> model trained on the famous Titanic dataset. The model analyzes passenger demographics, ticket class, fare, and family relationships to predict survival probability with <strong>~81% accuracy</strong>.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-white/10">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-400">Features Used:</span>
+                            <span class="text-blue-300">8 Key Variables</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Website Purpose Container -->
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">What We Do</h3>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        This interactive web application lets you <strong>simulate passenger profiles</strong> and see their survival chances. Explore data visualizations, learn about the disaster's historical context, and understand how machine learning can predict outcomes from historical data.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-white/10">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-400">Interactive:</span>
+                            <span class="text-emerald-300">Live Predictions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fun Facts Container -->
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Fun Facts</h3>
+                    </div>
+                    <div class="text-gray-300 space-y-3">
+                        <div class="flex items-start">
+                            <span class="text-orange-400 mr-2">🚢</span>
+                            <p><strong>Did you know?</strong> The Titanic had 4 smokestacks, but only 3 were functional!</p>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-orange-400 mr-2">💎</span>
+                            <p><strong>Pricey ticket:</strong> The most expensive suite cost $4,350 (equivalent to $100,000 today)!</p>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-orange-400 mr-2">🍽️</span>
+                            <p><strong>Massive meals:</strong> The ship carried 40,000 eggs and 75,000 lbs of fresh meat!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historical Context Container -->
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Historical Context</h3>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        On <strong>April 15, 1912</strong>, the "unsinkable" RMS Titanic struck an iceberg and sank in the North Atlantic Ocean. Of the <strong>2,224 passengers</strong> aboard, only <strong>710 survived</strong>. This tragedy led to major improvements in maritime safety.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-white/10">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-400">Survival Rate:</span>
+                            <span class="text-indigo-300">32% Overall</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Insights Container -->
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Key Insights</h3>
+                    </div>
+                    <div class="text-gray-300 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span>👩 Women & Children</span>
+                            <span class="text-purple-300 font-semibold">Priority</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>💰 1st Class Passengers</span>
+                            <span class="text-purple-300 font-semibold">62% Survival</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>⚓ Crew Members</span>
+                            <span class="text-purple-300 font-semibold">24% Survival</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Try It Now Container -->
+                <div class="bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-md rounded-xl p-6 border border-blue-400/30 hover:from-blue-600/30 hover:to-purple-600/30 transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Try It Now!</h3>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Ready to explore? Use our interactive predictor to create passenger profiles and discover their survival chances. Learn what factors made the difference between life and death.
+                    </p>
+                    <a href="predictor.html" class="inline-block w-full text-center bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        Start Predicting →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/60">
+        <div class="panel bg-gray-800 rounded-2xl p-8 max-w-md w-full mx-6 relative shadow-2xl border border-gray-700">
+            <button id="close-auth-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            <h2 class="text-2xl font-bold text-white mb-6">Login / Sign Up</h2>
+            <form id="auth-form" class="space-y-4">
+                <div>
+                    <label for="auth-email" class="block text-sm font-medium text-gray-300">Email</label>
+                    <input type="email" id="auth-email" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white">
+                </div>
+                <div>
+                    <label for="auth-password" class="block text-sm font-medium text-gray-300">Password</label>
+                    <input type="password" id="auth-password" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg">Login</button>
+            </form>
+            <p class="mt-4 text-sm text-gray-400 text-center">
+                <span id="auth-switch-text">No account? </span>
+                <button id="auth-switch-btn" class="text-blue-400 hover:underline">Sign up</button>
+            </p>
+            <p id="auth-error" class="mt-2 text-sm text-red-400 hidden"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="backend-config.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDt3zpXM6Yn85sB6utrl4ClCNI5c3D4QSI",
+            authDomain: "ads-project-c5d3e.firebaseapp.com",
+            projectId: "ads-project-c5d3e",
+            storageBucket: "ads-project-c5d3e.firebasestorage.app",
+            messagingSenderId: "514692371937",
+            appId: "1:514692371937:web:8db73a6b6db3d513082ea0",
+            measurementId: "G-QPVP2JLC59"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+
+        // Auth elements
+        const authBtn = document.getElementById('auth-btn');
+        const authModal = document.getElementById('auth-modal');
+        const closeAuthModal = document.getElementById('close-auth-modal');
+        const authForm = document.getElementById('auth-form');
+        const authError = document.getElementById('auth-error');
+        const authSwitchBtn = document.getElementById('auth-switch-btn');
+        const authSwitchText = document.getElementById('auth-switch-text');
+        const authTitle = authModal.querySelector('h2');
+
+        let isLogin = true;
+
+        // Auth modal handlers
+        authBtn.addEventListener('click', () => {
+            authModal.classList.remove('hidden');
+        });
+
+        closeAuthModal.addEventListener('click', () => {
+            authModal.classList.add('hidden');
+        });
+
+        authSwitchBtn.addEventListener('click', () => {
+            isLogin = !isLogin;
+            authTitle.textContent = isLogin ? 'Login' : 'Sign Up';
+            authForm.querySelector('button[type="submit"]').textContent = isLogin ? 'Login' : 'Sign Up';
+            authSwitchText.textContent = isLogin ? 'No account? ' : 'Already have an account? ';
+            authSwitchBtn.textContent = isLogin ? 'Sign up' : 'Login';
+        });
+
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+
+            try {
+                if (isLogin) {
+                    await signInWithEmailAndPassword(auth, email, password);
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                }
+                authModal.classList.add('hidden');
+                authForm.reset();
+            } catch (error) {
+                authError.textContent = error.message;
+                authError.classList.remove('hidden');
+            }
+        });
+
+        // Update auth button based on user state
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                authBtn.textContent = 'Logout';
+                authBtn.addEventListener('click', () => {
+                    signOut(auth);
+                });
+            } else {
+                authBtn.textContent = 'Login';
+            }
+        });
+    </script>
+</body>
+</html>

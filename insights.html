@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titanic Survival Predictor - Insights</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- App styles -->
+    <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body class="bg-gray-900 text-gray-200 font-sans bg-grid">
+
+    <!-- Top Navigation -->
+    <nav class="sticky top-0 z-40 backdrop-blur bg-gray-900/70 border-b border-white/10">
+        <div class="container mx-auto px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="assets/titanic-ship.png" alt="Titanic Ship" class="h-8 w-8 rounded object-cover">
+                <span class="text-white font-semibold">Titanic Predictor</span>
+            </div>
+            <div class="hidden md:flex items-center gap-6 text-sm text-gray-300">
+                <a href="home.html" class="hover:text-white transition">Home</a>
+                <a href="predictor.html" class="hover:text-white transition">Predictor</a>
+                <a href="insights.html" class="hover:text-white transition text-blue-400">Insights</a>
+                <a href="about.html" class="hover:text-white transition">About</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle" aria-label="Toggle theme" class="text-sm text-gray-300 hover:text-white border border-white/10 rounded px-3 py-1.5">
+                    <span id="theme-toggle-label">Night</span>
+                </button>
+                <button id="auth-btn" class="text-sm text-gray-300 hover:text-white border border-white/10 rounded px-3 py-1.5">Login</button>
+                <div class="md:hidden text-gray-300">☰</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-10">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <div class="inline-block px-4 py-2 bg-purple-500/20 rounded-full border border-purple-400/30 mb-4">
+                <span class="text-sm font-semibold text-purple-300">📊 Data Analytics</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Key Insights: Who Was More Likely to Survive?</h1>
+            <p class="text-gray-300 text-lg max-w-2xl mx-auto">Explore the historical data patterns that reveal the survival factors from the Titanic disaster</p>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            
+            <!-- Chart 1: By Sex -->
+            <div class="panel bg-gray-800 rounded-xl p-6 border border-gray-700 hover:scale-105 transition-transform">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="p-2 bg-pink-500/20 rounded-lg">
+                        <svg class="w-5 h-5 text-pink-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Survival by Sex</h3>
+                </div>
+                <canvas id="sexChart"></canvas>
+                <p class="mt-4 text-xs text-gray-400 text-center">Women had significantly higher survival rates</p>
+            </div>
+            
+            <!-- Chart 2: By Class -->
+            <div class="panel bg-gray-800 rounded-xl p-6 border border-gray-700 hover:scale-105 transition-transform">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="p-2 bg-yellow-500/20 rounded-lg">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Survival by Class</h3>
+                </div>
+                <canvas id="classChart"></canvas>
+                <p class="mt-4 text-xs text-gray-400 text-center">Higher classes had better survival chances</p>
+            </div>
+
+            <!-- Chart 3: By Age -->
+            <div class="panel bg-gray-800 rounded-xl p-6 border border-gray-700 hover:scale-105 transition-transform">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="p-2 bg-blue-500/20 rounded-lg">
+                        <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Survival by Age</h3>
+                </div>
+                <canvas id="ageChart"></canvas>
+                <p class="mt-4 text-xs text-gray-400 text-center">Children had the highest survival rates</p>
+            </div>
+
+            <!-- Chart 4: By Fare -->
+            <div class="panel bg-gray-800 rounded-xl p-6 border border-gray-700 hover:scale-105 transition-transform">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="p-2 bg-green-500/20 rounded-lg">
+                        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Survival by Fare</h3>
+                </div>
+                <canvas id="fareChart"></canvas>
+                <p class="mt-4 text-xs text-gray-400 text-center">Higher fares correlated with better survival</p>
+            </div>
+
+            <!-- Chart 5: By Port -->
+            <div class="panel bg-gray-800 rounded-xl p-6 border border-gray-700 hover:scale-105 transition-transform">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="p-2 bg-indigo-500/20 rounded-lg">
+                        <svg class="w-5 h-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Survival by Port</h3>
+                </div>
+                <canvas id="portChart"></canvas>
+                <p class="mt-4 text-xs text-gray-400 text-center">Port of embarkation affected survival rates</p>
+            </div>
+
+            <!-- Chart 6: Family Size -->
+            <div class="panel bg-gray-800 rounded-xl p-6 border border-gray-700 hover:scale-105 transition-transform">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="p-2 bg-purple-500/20 rounded-lg">
+                        <svg class="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Survival by Family Size</h3>
+                </div>
+                <canvas id="familyChart"></canvas>
+                <p class="mt-4 text-xs text-gray-400 text-center">Small families had better survival rates</p>
+            </div>
+        </div>
+
+        <!-- Key Statistics -->
+        <div class="panel bg-gray-800 rounded-2xl p-8 border border-gray-700">
+            <h2 class="text-3xl font-bold text-white mb-6 text-center">Key Statistics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-blue-400 mb-2">2,224</div>
+                    <div class="text-sm text-gray-300">Total Passengers</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-400 mb-2">710</div>
+                    <div class="text-sm text-gray-300">Survivors</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-red-400 mb-2">1,514</div>
+                    <div class="text-sm text-gray-300">Casualties</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-yellow-400 mb-2">32%</div>
+                    <div class="text-sm text-gray-300">Overall Survival Rate</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/60">
+        <div class="panel bg-gray-800 rounded-2xl p-8 max-w-md w-full mx-6 relative shadow-2xl border border-gray-700">
+            <button id="close-auth-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            <h2 class="text-2xl font-bold text-white mb-6">Login / Sign Up</h2>
+            <form id="auth-form" class="space-y-4">
+                <div>
+                    <label for="auth-email" class="block text-sm font-medium text-gray-300">Email</label>
+                    <input type="email" id="auth-email" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white">
+                </div>
+                <div>
+                    <label for="auth-password" class="block text-sm font-medium text-gray-300">Password</label>
+                    <input type="password" id="auth-password" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg">Login</button>
+            </form>
+            <p class="mt-4 text-sm text-gray-400 text-center">
+                <span id="auth-switch-text">No account? </span>
+                <button id="auth-switch-btn" class="text-blue-400 hover:underline">Sign up</button>
+            </p>
+            <p id="auth-error" class="mt-2 text-sm text-red-400 hidden"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/insights.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDt3zpXM6Yn85sB6utrl4ClCNI5c3D4QSI",
+            authDomain: "ads-project-c5d3e.firebaseapp.com",
+            projectId: "ads-project-c5d3e",
+            storageBucket: "ads-project-c5d3e.firebasestorage.app",
+            messagingSenderId: "514692371937",
+            appId: "1:514692371937:web:8db73a6b6db3d513082ea0",
+            measurementId: "G-QPVP2JLC59"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+
+        // Auth elements
+        const authBtn = document.getElementById('auth-btn');
+        const authModal = document.getElementById('auth-modal');
+        const closeAuthModal = document.getElementById('close-auth-modal');
+        const authForm = document.getElementById('auth-form');
+        const authError = document.getElementById('auth-error');
+        const authSwitchBtn = document.getElementById('auth-switch-btn');
+        const authSwitchText = document.getElementById('auth-switch-text');
+        const authTitle = authModal.querySelector('h2');
+
+        let isLogin = true;
+
+        // Auth modal handlers
+        authBtn.addEventListener('click', () => {
+            authModal.classList.remove('hidden');
+        });
+
+        closeAuthModal.addEventListener('click', () => {
+            authModal.classList.add('hidden');
+        });
+
+        authSwitchBtn.addEventListener('click', () => {
+            isLogin = !isLogin;
+            authTitle.textContent = isLogin ? 'Login' : 'Sign Up';
+            authForm.querySelector('button[type="submit"]').textContent = isLogin ? 'Login' : 'Sign Up';
+            authSwitchText.textContent = isLogin ? 'No account? ' : 'Already have an account? ';
+            authSwitchBtn.textContent = isLogin ? 'Sign up' : 'Login';
+        });
+
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+
+            try {
+                if (isLogin) {
+                    await signInWithEmailAndPassword(auth, email, password);
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                }
+                authModal.classList.add('hidden');
+                authForm.reset();
+            } catch (error) {
+                authError.textContent = error.message;
+                authError.classList.remove('hidden');
+            }
+        });
+
+        // Update auth button based on user state
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                authBtn.textContent = 'Logout';
+                authBtn.addEventListener('click', () => {
+                    signOut(auth);
+                });
+            } else {
+                authBtn.textContent = 'Login';
+            }
+        });
+
+        // Chart configurations
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#e5e7eb'
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#9ca3af'
+                    },
+                    grid: {
+                        color: '#374151'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#9ca3af'
+                    },
+                    grid: {
+                        color: '#374151'
+                    }
+                }
+            }
+        };
+
+        // Sex Chart
+        new Chart(document.getElementById('sexChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Female', 'Male'],
+                datasets: [{
+                    label: 'Survival Rate (%)',
+                    data: [74, 19],
+                    backgroundColor: ['#ec4899', '#3b82f6'],
+                    borderColor: ['#ec4899', '#3b82f6'],
+                    borderWidth: 1
+                }]
+            },
+            options: chartOptions
+        });
+
+        // Class Chart
+        new Chart(document.getElementById('classChart'), {
+            type: 'bar',
+            data: {
+                labels: ['1st Class', '2nd Class', '3rd Class'],
+                datasets: [{
+                    label: 'Survival Rate (%)',
+                    data: [62, 43, 26],
+                    backgroundColor: ['#eab308', '#f59e0b', '#dc2626'],
+                    borderColor: ['#eab308', '#f59e0b', '#dc2626'],
+                    borderWidth: 1
+                }]
+            },
+            options: chartOptions
+        });
+
+        // Age Chart
+        new Chart(document.getElementById('ageChart'), {
+            type: 'line',
+            data: {
+                labels: ['0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '70+'],
+                datasets: [{
+                    label: 'Survival Rate (%)',
+                    data: [59, 38, 35, 39, 35, 29, 20, 12],
+                    borderColor: '#3b82f6',
+                    backgroundColor: '#3b82f6',
+                    tension: 0.4,
+                    fill: false
+                }]
+            },
+            options: chartOptions
+        });
+
+        // Fare Chart
+        new Chart(document.getElementById('fareChart'), {
+            type: 'line',
+            data: {
+                labels: ['0-10', '10-50', '50-100', '100-200', '200+'],
+                datasets: [{
+                    label: 'Survival Rate (%)',
+                    data: [20, 35, 55, 70, 85],
+                    borderColor: '#10b981',
+                    backgroundColor: '#10b981',
+                    tension: 0.4,
+                    fill: false
+                }]
+            },
+            options: chartOptions
+        });
+
+        // Port Chart
+        new Chart(document.getElementById('portChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Cherbourg', 'Queenstown', 'Southampton'],
+                datasets: [{
+                    label: 'Survival Rate (%)',
+                    data: [55, 39, 34],
+                    backgroundColor: ['#6366f1', '#8b5cf6', '#a855f7'],
+                    borderColor: ['#6366f1', '#8b5cf6', '#a855f7'],
+                    borderWidth: 1
+                }]
+            },
+            options: chartOptions
+        });
+
+        // Family Size Chart
+        new Chart(document.getElementById('familyChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Alone', '1-2', '3-4', '5+'],
+                datasets: [{
+                    label: 'Survival Rate (%)',
+                    data: [30, 55, 72, 20],
+                    backgroundColor: ['#a855f7', '#c084fc', '#d8b4fe', '#e9d5ff'],
+                    borderColor: ['#a855f7', '#c084fc', '#d8b4fe', '#e9d5ff'],
+                    borderWidth: 1
+                }]
+            },
+            options: chartOptions
+        });
+    </script>
+</body>
+</html>
