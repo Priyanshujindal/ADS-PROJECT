@@ -1,5 +1,12 @@
 # Titanic Survival Predictor
 
+Power Bi 
+![powerbi](https://github.com/Priyanshujindal/ADS-PROJECT/blob/82e64249386e40963b7513632d9949a13458f3b4/be740809-91ad-4edf-a863-d0311d4c7898.jpg)
+![homepage](https://github.com/Priyanshujindal/ADS-PROJECT/blob/82e64249386e40963b7513632d9949a13458f3b4/6502eebb-7bf2-4ac8-9b7e-9cc994af6dc0.jpg)
+![Compare Page](https://github.com/Priyanshujindal/ADS-PROJECT/blob/82e64249386e40963b7513632d9949a13458f3b4/94892ec3-c069-4bc4-84fa-ef3e6f70c79a.jpg)
+![Login Page](https://github.com/Priyanshujindal/ADS-PROJECT/blob/82e64249386e40963b7513632d9949a13458f3b4/b84a46ce-d80d-4b0d-89ed-f11ec2d2cbe8.jpg)
+
+
 A web application that predicts the survival probability of Titanic passengers based on various features like passenger class, age, gender, and more.
 
 ## Features
